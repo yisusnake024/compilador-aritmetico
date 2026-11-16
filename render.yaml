@@ -18,9 +18,9 @@ services:
         value: 800
 
   # 2. Frontend Web (React + Vite)
-  - type: static
+  - type: web
     name: compilador-frontend
-    runtime: node
+    runtime: static
     rootDir: frontend
     plan: free
     buildCommand: npm install && npm run build
@@ -35,4 +35,3 @@ services:
           type: web
           name: compilador-backend
           property: host
-
