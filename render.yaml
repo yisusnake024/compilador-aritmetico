@@ -1,0 +1,38 @@
+services:
+  # 1. Backend API (FastAPI)
+  - type: web
+    name: compilador-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: gemini-3.1-flash-lite
+      - key: AI_TIMEOUT_SECONDS
+        value: 45
+      - key: AI_MAX_TOKENS
+        value: 800
+
+  # 2. Frontend Web (React + Vite)
+  - type: static
+    name: compilador-frontend
+    runtime: node
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: compilador-backend
+          property: host
+
