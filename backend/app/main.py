@@ -46,6 +46,17 @@ class FormulaRequest(BaseModel):
 
 # ---- Endpoints ----
 
+@app.get("/")
+def root():
+    """Ruta raíz amigable para verificar que el backend está activo."""
+    return {
+        "servicio": "Simulador de Compilador Aritmético API",
+        "estado": "activo",
+        "salud": "/api/health",
+        "documentacion": "/docs",
+    }
+
+
 @app.get("/api/health")
 def health():
     """Estado del servicio y disponibilidad de IA."""
