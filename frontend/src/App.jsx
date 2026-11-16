@@ -44,8 +44,14 @@ export default function App() {
           err.message.includes('NetworkError') ||
           err.message.includes('fetch'))
       ) {
+        const esLocal =
+          typeof window !== 'undefined' &&
+          (window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1');
         setErrorConexion(
-          'No se pudo conectar con el backend en http://localhost:8000. ¿Está corriendo uvicorn?'
+          esLocal
+            ? 'No se pudo conectar con el backend en http://localhost:8000. ¿Está corriendo uvicorn?'
+            : 'No se pudo conectar con el backend en la nube. El servidor puede estar despertando (Cold Start de Render, suele tardar ~30s en su primera petición) o la URL del backend aún no ha terminado de enlazar. Por favor espera 30 segundos y vuelve a pulsar "Analizar".'
         );
       } else if (err.message && err.message.startsWith('HTTP')) {
         setErrorConexion(
