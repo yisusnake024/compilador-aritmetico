@@ -1577,19 +1577,278 @@ body {
   margin-top: 2px;
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 768px) {
+/* ---------- Responsive Design Adaptativo ---------- */
+
+/* Tablets y Pantallas Medianas (<= 860px) */
+@media (max-width: 860px) {
   .app-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 14px;
   }
+
+  .app-header__brand {
+    justify-content: flex-start;
+  }
+
   .app-header__nav-wrap {
     width: 100%;
     justify-content: space-between;
-    overflow-x: auto;
   }
+
+  .nav-pills {
+    flex: 1;
+  }
+
+  .teoria-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .teoria-pipeline-nav {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Teléfonos y Pantallas Pequeñas (<= 640px) */
+@media (max-width: 640px) {
+  .app-container {
+    padding: 12px 10px 48px;
+  }
+
+  .tarjeta {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .tarjeta__titulo {
+    font-size: 0.95rem;
+    gap: 8px;
+  }
+
+  .tarjeta__titulo-numero {
+    width: 24px;
+    height: 24px;
+    font-size: 0.78rem;
+  }
+
+  /* Header en Móvil */
+  .app-header__logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .app-header__titulo {
+    font-size: 1.05rem;
+  }
+
+  .app-header__subtitulo {
+    font-size: 0.74rem;
+  }
+
+  .nav-pill {
+    padding: 6px 9px;
+    font-size: 0.74rem;
+  }
+
+  .nav-pill svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  /* Telemetría KPI en Móvil */
   .kpi-strip {
     flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .kpi-strip__metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+
+  .kpi-strip__badges {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Formulario e Input */
+  .formulario__input-wrapper {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .formulario__input {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+  }
+
+  .formulario__input-wrapper .btn-primario {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  /* Escenarios Rápidos */
+  .escenarios-header {
+    flex-direction: column;
     align-items: flex-start;
+    gap: 8px;
+  }
+
+  .escenarios-filtros {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .escenarios-filtro-btn {
+    flex-shrink: 0;
+  }
+
+  .chip {
+    padding: 4px 10px;
+    font-size: 0.74rem;
+  }
+
+  /* Stepper en Móvil */
+  .stepper {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .stepper__fase {
+    flex-shrink: 0;
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
+
+  .stepper__separador {
+    width: 16px;
+  }
+
+  /* Tablas de Datos */
+  .tabla th,
+  .tabla td {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
+
+  .tablas-semanticas {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* AST Gráfico */
+  .ast-grafico {
+    padding: 8px 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ast-grafico svg {
+    min-width: 280px;
+  }
+
+  .ast-texto pre {
+    font-size: 0.78rem;
+    padding: 14px;
+  }
+
+  /* Teoría en Móvil */
+  .teoria-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .teoria-tab-btn {
+    flex-shrink: 0;
+    font-size: 0.74rem;
+    padding: 5px 10px;
+  }
+
+  .teoria-pipeline-nav {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .teoria-pipeline-step {
+    flex-shrink: 0;
+    min-width: 130px;
+  }
+
+  .teoria-fase-card {
+    padding: 14px;
+  }
+
+  .teoria-fase-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .teoria-io-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .teoria-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .teoria-fase-card__footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .teoria-fase-card__footer .btn-secundario {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .teoria-fase-card__contador {
+    text-align: center;
+  }
+
+  .teoria-puente-ir {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .teoria-puente-ir__flecha {
+    transform: rotate(90deg);
+    margin: 2px 0;
+  }
+
+  /* Tutor de IA en Móvil */
+  .panel-feedback__resultado {
+    padding: 14px;
+  }
+
+  .panel-feedback__acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .panel-feedback__acciones .btn-secundario {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .panel-feedback__cache {
+    align-self: center;
   }
 }
