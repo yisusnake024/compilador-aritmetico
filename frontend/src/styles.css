@@ -41,6 +41,14 @@
   --info: #2563EB;
   --info-suave: rgba(37, 99, 235, 0.12);
 
+  --exito: #15803D;
+  --exito-suave: rgba(21, 128, 61, 0.12);
+  --exito-borde: rgba(21, 128, 61, 0.25);
+
+  --advertencia: #B45309;
+  --advertencia-suave: rgba(180, 83, 9, 0.12);
+  --advertencia-borde: rgba(180, 83, 9, 0.25);
+
   --sombra: 0 1px 3px rgba(38, 38, 36, 0.05), 0 1px 2px rgba(38, 38, 36, 0.08);
   --sombra-elevada: 0 4px 14px rgba(38, 38, 36, 0.08);
   --radio-tarjeta: 14px;
@@ -78,6 +86,14 @@
 
   --info: #60A5FA;
   --info-suave: rgba(96, 165, 250, 0.14);
+
+  --exito: #4ADE80;
+  --exito-suave: rgba(74, 222, 128, 0.14);
+  --exito-borde: rgba(74, 222, 128, 0.3);
+
+  --advertencia: #FBBF24;
+  --advertencia-suave: rgba(251, 191, 36, 0.14);
+  --advertencia-borde: rgba(251, 191, 36, 0.3);
 
   --sombra: none;
   --sombra-elevada: none;
@@ -838,6 +854,387 @@ body {
   right: 10px;
 }
 
+/* Tablas Semánticas y Análisis Semántico Detallado */
+.semantica-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Banner superior */
+.semantica-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  background: var(--superficie-2);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-control);
+  padding: 12px 16px;
+}
+
+.semantica-banner__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.semantica-banner__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texto-secundario);
+}
+
+.semantica-banner__code {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--acento);
+}
+
+.semantica-banner__val {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+/* Selector de pestañas semánticas */
+.semantica-nav {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--borde);
+  padding-bottom: 8px;
+  overflow-x: auto;
+}
+
+.semantica-nav__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radio-control);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--texto-secundario);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transicion);
+}
+
+.semantica-nav__btn:hover {
+  background: var(--superficie-2);
+  color: var(--texto);
+}
+
+.semantica-nav__btn--activo {
+  background: var(--acento-suave);
+  color: var(--acento);
+  border-color: var(--acento-borde);
+  font-weight: 700;
+}
+
+/* Guía contextual */
+.semantica-guia-contextual {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--info-suave);
+  border: 1px solid var(--info);
+  border-radius: var(--radio-control);
+  color: var(--texto);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.semantica-guia-contextual svg {
+  color: var(--info);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Timeline y tarjetas paso a paso */
+.semantica-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.semantica-card-paso {
+  background: var(--superficie-2);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-control);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform var(--transicion), border-color var(--transicion);
+}
+
+.semantica-card-paso:hover {
+  border-color: var(--acento-borde);
+}
+
+.semantica-card-paso--nuevo {
+  border-left: 4px solid var(--exito);
+}
+
+.semantica-card-paso--duplicado {
+  border-left: 4px solid var(--advertencia);
+  opacity: 0.92;
+}
+
+.semantica-card-paso__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.semantica-card-paso__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.semantica-card-paso__badge-indice {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texto-secundario);
+  background: var(--superficie);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--borde);
+}
+
+.semantica-card-paso__valor-badge {
+  font-size: 0.88rem;
+  color: var(--texto);
+}
+
+.semantica-card-paso__valor-badge strong {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  color: var(--acento);
+  font-size: 0.95rem;
+}
+
+.semantica-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.semantica-tag--success {
+  background: var(--exito-suave);
+  color: var(--exito);
+  border: 1px solid var(--exito-borde);
+}
+
+.semantica-tag--warning {
+  background: var(--advertencia-suave);
+  color: var(--advertencia);
+  border: 1px solid var(--advertencia-borde);
+}
+
+.semantica-card-paso__desc {
+  font-size: 0.85rem;
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+.semantica-card-paso__detalles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: var(--superficie);
+  border: 1px solid var(--borde-suave);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.semantica-card-paso__col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.semantica-sublabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texto-secundario);
+}
+
+.semantica-accion-desc {
+  font-size: 0.82rem;
+  color: var(--texto);
+}
+
+.semantica-accion-desc--asignar {
+  color: var(--exito);
+  font-weight: 600;
+}
+
+.semantica-accion-desc--omitir {
+  color: var(--advertencia);
+}
+
+.semantica-dir-pill {
+  display: inline-block;
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--acento-borde);
+}
+
+.badge--exito {
+  background: var(--exito-suave);
+  color: var(--exito);
+  border-color: var(--exito-borde);
+}
+
+/* Fórmulas y Fundamento Teórico */
+.semantica-formulas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.semantica-formula-card {
+  background: var(--superficie-2);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-control);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.semantica-formula-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--borde);
+  padding-bottom: 12px;
+}
+
+.semantica-formula-card__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--acento-suave);
+  color: var(--acento);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.semantica-formula-card__titulo {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 2px;
+}
+
+.semantica-formula-card__sub {
+  font-size: 0.75rem;
+  color: var(--texto-secundario);
+}
+
+.semantica-formula-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--texto);
+  line-height: 1.55;
+}
+
+.semantica-formula-box {
+  background: var(--superficie);
+  border: 1px solid var(--acento-borde);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.semantica-formula-box__title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--acento);
+}
+
+.semantica-formula-math {
+  background: var(--superficie-2);
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.85rem;
+  color: var(--acento);
+  font-weight: 700;
+  overflow-x: auto;
+}
+
+.semantica-formula-box__cond {
+  font-size: 0.78rem;
+  color: var(--texto-secundario);
+}
+
+.semantica-algoritmo-pasos h5 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.semantica-algoritmo-pasos ol,
+.semantica-algoritmo-pasos ul {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--texto-secundario);
+}
+
+.semantica-algoritmo-pasos li strong {
+  color: var(--texto);
+}
+
+.semantica-algoritmo-pasos code {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.8rem;
+  background: var(--superficie);
+  padding: 1px 4px;
+  border-radius: 4px;
+  color: var(--acento);
+}
+
 /* Tablas Semánticas */
 .tablas-semanticas {
   display: grid;
@@ -845,15 +1242,43 @@ body {
   gap: 16px;
 }
 
-.tablas-semanticas__grupo h4 {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--texto);
-  margin-bottom: 8px;
+.tablas-semanticas__grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-@media (max-width: 680px) {
+.tablas-semanticas__grupo h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.tablas-semanticas__grupo h4 svg {
+  color: var(--acento);
+}
+
+.tablas-semanticas__nota {
+  font-size: 0.75rem;
+  color: var(--texto-secundario);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+@media (max-width: 820px) {
+  .semantica-banner {
+    grid-template-columns: 1fr;
+  }
+  .semantica-formulas-grid {
+    grid-template-columns: 1fr;
+  }
   .tablas-semanticas {
+    grid-template-columns: 1fr;
+  }
+  .semantica-card-paso__detalles {
     grid-template-columns: 1fr;
   }
 }

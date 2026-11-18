@@ -226,6 +226,8 @@ export default function App() {
                     <SymbolTables
                       tablaSimbolos={resultado.tabla_simbolos}
                       tablaTipos={resultado.tabla_tipos}
+                      formula={resultado.formula}
+                      tokens={resultado.tokens}
                     />
                   </div>
                 </>
