@@ -181,7 +181,7 @@ export default function App() {
                 <PhaseStepper estados={calcularEstadosFases()} />
               </div>
 
-              {/* Caso de Error Léxico o Sintáctico */}
+              {/* Caso de Error (Léxico o Sintáctico) */}
               {!resultado.ok && (
                 <div className="tarjeta tarjeta-animada">
                   <div className="tarjeta__titulo">
@@ -189,55 +189,39 @@ export default function App() {
                       !
                     </span>
                     {resultado.fase === 'lexico'
-                      ? 'Error en Análisis Léxico'
-                      : 'Error en Análisis Sintáctico'}
+                      ? 'Fase 1: Detección de Errores Léxicos'
+                      : 'Fase 2: Detección de Errores Sintácticos'}
                   </div>
                   <ErrorPanel errores={resultado.errores} formula={resultado.formula} />
                 </div>
               )}
 
-              {/* Caso Exitoso: AST (Gráfico y Texto) */}
+              {/* Caso Exitoso: Orden Formal de la Teoría de Compiladores */}
               {resultado.ok && (
                 <>
+                  {/* 1. Análisis Léxico (Tabla de Tokens) */}
                   <div className="tarjeta tarjeta-animada">
                     <div className="tarjeta__titulo">
-                      <span className="tarjeta__titulo-numero">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <circle cx="12" cy="5" r="3" />
-                          <line x1="12" y1="8" x2="5" y2="16" />
-                          <line x1="12" y1="8" x2="19" y2="16" />
-                        </svg>
-                      </span>
-                      Árbol de Sintaxis Abstracta (AST)
-                    </div>
-                    <AstView ast={resultado.ast} astTexto={resultado.ast_texto} />
-                  </div>
-
-                  {/* Tabla de Tokens debajo del AST */}
-                  <div className="tarjeta tarjeta-animada">
-                    <div className="tarjeta__titulo">
-                      <span className="tarjeta__titulo-numero">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <rect x="3" y="3" width="18" height="18" rx="2" />
-                          <line x1="3" y1="9" x2="21" y2="9" />
-                          <line x1="9" y1="21" x2="9" y2="9" />
-                        </svg>
-                      </span>
+                      <span className="tarjeta__titulo-numero">1</span>
                       Análisis Léxico: Tabla de Tokens Identificados
                     </div>
                     <TokensTable tokens={resultado.tokens} />
                   </div>
 
-                  {/* Tablas Semánticas debajo de Tokens */}
+                  {/* 2. Análisis Sintáctico (Árbol de Sintaxis Abstracta - AST) */}
                   <div className="tarjeta tarjeta-animada">
                     <div className="tarjeta__titulo">
-                      <span className="tarjeta__titulo-numero">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                        </svg>
-                      </span>
-                      Análisis Semántico: Tabla de Símbolos y Tipos
+                      <span className="tarjeta__titulo-numero">2</span>
+                      Análisis Sintáctico: Árbol de Sintaxis Abstracta (AST)
+                    </div>
+                    <AstView ast={resultado.ast} astTexto={resultado.ast_texto} />
+                  </div>
+
+                  {/* 3. Análisis Semántico Básico (Tablas de Símbolos y Tipos) */}
+                  <div className="tarjeta tarjeta-animada">
+                    <div className="tarjeta__titulo">
+                      <span className="tarjeta__titulo-numero">3</span>
+                      Análisis Semántico Básico: Tabla de Símbolos y Tipos
                     </div>
                     <SymbolTables
                       tablaSimbolos={resultado.tabla_simbolos}
@@ -247,7 +231,7 @@ export default function App() {
                 </>
               )}
 
-              {/* Panel de IA al final de los resultados */}
+              {/* 4. Tutor Inteligente (Retroalimentación con IA) */}
               <div className="tarjeta tarjeta-animada">
                 <div className="tarjeta__titulo">
                   <span className="tarjeta__titulo-numero">
