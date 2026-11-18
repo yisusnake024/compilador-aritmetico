@@ -9,13 +9,13 @@
 [![Vite](https://img.shields.io/badge/Bundler-Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Gemini](https://img.shields.io/badge/IA-Google%20Gemini-8E75C2?logo=google&logoColor=white)](https://ai.google.dev/)
 [![Render](https://img.shields.io/badge/Deploy-Render.com-46E3B7?logo=render&logoColor=white)](https://render.com/)
-[![Tests](https://img.shields.io/badge/Tests-Pytest%20(17%20passed)-brightgreen?logo=pytest&logoColor=white)](https://docs.pytest.org/)
+[![Tests](https://img.shields.io/badge/Tests-Pytest%20(12%20passed)-brightgreen?logo=pytest&logoColor=white)](https://docs.pytest.org/)
 
 ---
 
 ## 📌 1. ¿Qué hace este proyecto?
 
-El **Simulador de Compilador Aritmético** es una aplicación *Full-Stack* que permite a los usuarios escribir o seleccionar fórmulas aritméticas (como `10 + 25 * 10 - 4`, `(10 + 25) * (10 - 4)` o `12 + 4 # 3`) y observar **en tiempo real y de manera visual e interactiva** cómo un compilador real procesa el código fuente paso a paso.
+El **Simulador de Compilador Aritmético** es una aplicación *Full-Stack* que permite a los usuarios escribir o seleccionar fórmulas aritméticas (como `10 + 25 * 10 - 4` o `12 + 4 # 3`) y observar **en tiempo real y de manera visual e interactiva** cómo un compilador real procesa el código fuente paso a paso.
 
 ### Características Principales:
 - 🔍 **Pipeline del Compilador Fase por Fase:** Inspección del análisis léxico, sintáctico y semántico.
@@ -25,7 +25,7 @@ El **Simulador de Compilador Aritmético** es una aplicación *Full-Stack* que p
 - 📊 **Tablas Semánticas y Léxicas en Vivo:** Tabla de tokens identificados (con posiciones y categorías) y Tablas de Símbolos (direcciones de memoria `dir_1`, `dir_2`...) y de Tipos (`entero`).
 - 🤖 **Tutor Inteligente Asistido por IA (Google Gemini):** Explica pedagógicamente qué ocurrió en cada fase, justifica la jerarquía del AST (por qué los operadores de mayor precedencia como `*` o `/` forman subárboles profundos y cómo actúa la asociatividad por la izquierda), detecta errores con sugerencias de corrección y propone ejercicios de práctica.
 - 📚 **Módulo de Fundamento Teórico Interactivo:** Recorrido interactivo por las **6 fases de un compilador industrial** (Front-End: Léxico, Sintáctico, Semántico; Back-End: Código Intermedio/TAC, Optimización/Plegado de Constantes, Generación Objeto x86_64).
-- ⚡ **15 Escenarios Rápidos:** Casos de prueba listos para usar clasificados en *Precedencia*, *Asociatividad Izquierda*, *Paréntesis*, *Errores Léxicos* y *Errores Sintácticos*.
+- ⚡ **15 Escenarios Rápidos:** Casos de prueba listos para usar clasificados en *Precedencia*, *Asociatividad Izquierda*, *Paréntesis (error léxico)*, *Errores Léxicos* y *Errores Sintácticos*.
 - 📱 **Diseño 100% Responsivo:** Adaptado para computadoras, tablets y teléfonos móviles (320px+).
 - 🌓 **Tema Claro y Oscuro:** Paleta artesanal *Deep Forest & Sand* con persistencia en `localStorage`.
 
@@ -74,9 +74,10 @@ flowchart TD
 
 ### 1. Fase Léxica (`lexer.py`)
 Lee la cadena de texto cruda y la divide en componentes léxicos válidos (**tokens**):
-- Reconoce números enteros (`10`, `25`, `4`) y operadores aritméticos (`+`, `-`, `*`, `/`, `(`, `)`).
-- Asigna a cada token su posición exacta (fila y columna).
-- Si encuentra un carácter fuera del alfabeto permitido (como `@` o `#`), detiene el pipeline y reporta la posición exacta del error.
+- Reconoce **números enteros** (`10`, `25`, `4`) y los **cuatro operadores aritméticos** (`+`, `-`, `*`, `/`).
+- Los **espacios en blanco** se ignoran (no generan token).
+- Cualquier otro carácter —incluyendo letras, **paréntesis** `(` `)`, punto decimal `.`, `@`, `#`, `$`, etc.— se considera un **error léxico** e indica el carácter inválido y su posición exacta (contada desde 1).
+- Cuando se detecta un error léxico el pipeline se detiene y no pasa a las siguientes fases.
 
 ### 2. Fase Sintáctica (`parser.py`)
 Implementa un **Parser Descendente Recursivo** para la Gramática Libre de Contexto LL(1) sin recursión por la izquierda:

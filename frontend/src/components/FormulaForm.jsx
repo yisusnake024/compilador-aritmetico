@@ -5,7 +5,6 @@ const CATEGORIAS = [
   { id: 'todos', nombre: 'Todos' },
   { id: 'precedencia', nombre: 'Precedencia (*, /)' },
   { id: 'asociatividad', nombre: 'Asociatividad Izq.' },
-  { id: 'parentesis', nombre: 'Paréntesis' },
   { id: 'lexico', nombre: 'Errores Léxicos' },
   { id: 'sintactico', nombre: 'Errores Sintácticos' },
 ];
@@ -57,27 +56,27 @@ const ESCENARIOS = [
     desc: 'Cadena profunda de 4 operandos con asociatividad hacia la rama izquierda.',
   },
 
-  // 3. Paréntesis
+  // 3. Paréntesis → error léxico (el PDF los clasifica explícitamente como caracteres inválidos)
   {
-    formula: '(10 + 25) * (10 - 4)',
-    tag: 'Paréntesis Múltiples',
+    formula: '(10 + 25) * 2',
+    tag: 'Paréntesis = Error Léxico',
     categoria: 'parentesis',
-    tipo: 'exito',
-    desc: 'Los paréntesis alteran la jerarquía: las sumas y restas se resuelven antes, dejando a (*) como raíz.',
+    tipo: 'error',
+    desc: 'Según el PDF del proyecto, los paréntesis son caracteres no válidos. El lexer los reporta como error léxico en su posición.',
   },
   {
-    formula: '((5 + 3) * 2) - 8',
-    tag: 'Paréntesis Anidados',
+    formula: '((5 + 3) * 2)',
+    tag: 'Paréntesis Anidados = Error',
     categoria: 'parentesis',
-    tipo: 'exito',
-    desc: 'Demuestra llamadas recursivas profundas del parser: resuelve del ámbito interior hacia el exterior.',
+    tipo: 'error',
+    desc: 'Los paréntesis anidados también generan error léxico. El compilador detecta cada "(" y ")" inválido con su posición exacta.',
   },
   {
-    formula: '12 * (8 - 3 + 1)',
-    tag: 'Paréntesis con Subexpresión',
+    formula: '12 * (8 - 3)',
+    tag: 'Paréntesis en Subexpresión',
     categoria: 'parentesis',
-    tipo: 'exito',
-    desc: 'Evalúa la subexpresión interna con asociatividad izquierda antes de multiplicar por 12.',
+    tipo: 'error',
+    desc: 'El alcance del lenguaje solo admite enteros, operadores (+,-,*,/) y espacios. Cualquier otro símbolo, incluido "(", genera error.',
   },
 
   // 4. Errores Léxicos
@@ -109,21 +108,21 @@ const ESCENARIOS = [
     tag: 'Operadores consecutivos',
     categoria: 'sintactico',
     tipo: 'error',
-    desc: 'Error en Análisis Sintáctico: la gramática LL(1) esperaba un número o "(" tras el operador "+".',
-  },
-  {
-    formula: '(12 + 4 * 2',
-    tag: 'Paréntesis sin cerrar',
-    categoria: 'sintactico',
-    tipo: 'error',
-    desc: 'Error en Análisis Sintáctico: la expresión culmina sin el paréntesis de cierre ")" correspondiente.',
+    desc: 'Error en Análisis Sintáctico: la gramática LL(1) esperaba un número tras el operador "+" pero encontró otro "+".',
   },
   {
     formula: '8 * 4 -',
     tag: 'Operador sin operando final',
     categoria: 'sintactico',
     tipo: 'error',
-    desc: 'Error en Análisis Sintáctico: terminación prematura de la fórmula con operador pendiente.',
+    desc: 'Error en Análisis Sintáctico: terminación prematura de la fórmula con operador pendiente sin operando derecho.',
+  },
+  {
+    formula: '100 + * 50',
+    tag: 'Operador donde se espera número',
+    categoria: 'sintactico',
+    tipo: 'error',
+    desc: 'Error en Análisis Sintáctico: se encontró un operador "*" en una posición donde la gramática esperaba un número entero.',
   },
 ];
 

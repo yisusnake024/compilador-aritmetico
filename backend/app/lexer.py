@@ -4,10 +4,10 @@ Analizador léxico para expresiones aritméticas.
 Caracteres válidos:
   - Dígitos (0-9)             → tokens tipo NÚMERO
   - Operadores (+, -, *, /)   → tokens tipo OPERADOR
-  - Paréntesis (, )           → tokens tipo PARÉNTESIS
   - Espacios                  → se ignoran
 
-Cualquier otro carácter genera un error léxico.
+Cualquier otro carácter (letras, paréntesis, punto decimal,
+símbolos, etc.) genera un error léxico.
 Posiciones contadas desde 1.
 """
 
@@ -61,19 +61,7 @@ def tokenizar(formula):
             i += 1
             continue
 
-        # Paréntesis
-        if c in "()":
-            tokens.append({
-                "n": n,
-                "tipo": "PARÉNTESIS",
-                "valor": c,
-                "posicion": i + 1,
-            })
-            n += 1
-            i += 1
-            continue
-
-        # Carácter no válido
+        # Carácter no válido (incluye paréntesis, letras, punto decimal, etc.)
         errores.append({
             "caracter": c,
             "posicion": i + 1,
